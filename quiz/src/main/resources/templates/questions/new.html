@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>New question</title>
+<style>
+    .box {
+        display: none;
+    }
+</style>
+
+</head>
+<body>
+<script>
+    var currBox = 0;
+    function Selected(a) {
+        if(a) {
+            document.getElementById("Block"+a).style.display = "block";
+            if(currBox) document.getElementById("Block"+currBox).style.display = "none";
+            currBox = a;
+        } else alert("Not selected");
+    }
+</script>
+<form th:method="POST" th:action="@{/questions/{id}(id=${questions.getId()})}" th:object="${questions}">
+    <label for="question">Введите вопрос: </label>
+    <input type="text" th:field="*{question}" id="question"/>
+    <br/>
+
+    <label for="type">Введите тип ответа: </label>
+    <select type="enum" name="AnswerEnum" th:field="*{type}" id="type" onchange="Selected(this.value)">
+        <option value="" selected="selected">-</option>
+        <option value="1" type="enum">text</option>
+        <option value="2" type="enum">one</option>
+    </select>
+    <br/>
+    <div id="Block1" class="box">
+            <label for="answer">Введите ответ: </label>
+            <input type="text" th:field="*{answer}" id="answer"/>
+            <br/>
+            <label for="answer4">Введите вариант ответа: </label>
+            <input type="text" th:field="*{answerText}" id="answer4"/>
+            <br/>
+    </div>
+    <div id="Block2" class="box">
+            <label for="answer1">Введите ответ: </label>
+            <input type="text" th:field="*{answer}" id="answer1"/>
+            <br/>
+            <label for="answerOne1">1: </label>
+            <input type="text" th:field="*{answerOne1}" id="answerOne1"/>
+            <br/>
+            <label for="answerOne2">2: </label>
+            <input type="text" th:field="*{answerOne2}" id="answerOne2"/>
+            <br/>
+            <label for="answerOne3">3: </label>
+            <input type="text" th:field="*{answerOne3}" id="answerOne3"/>
+            <br/>
+    </div>
+    <input type="submit" value="Create!"/>
+</form>
+
+</body>
+</html>

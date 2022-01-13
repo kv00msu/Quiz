@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form th:method="POST" th:action="@{/admin/{id}/edit(id=${quiz.getId()})}" th:object="${quiz}">
+        <label for="nameQuiz">Enter name: </label>
+        <input type="text" th:field="*{nameQuiz}" id="nameQuiz"/>
+        <br/>
+        <label for="startDate">Веедите дату начала: </label>
+        <input type="date" th:field="*{startDate}" id="startDate"/>
+        <br/>
+        <label for="endDate">Веедите дату завершения: </label>
+        <input type="date" th:field="*{endDate}" id="endDate"/>
+        <br/>
+        <label for="description">Описание опроса: </label>
+        <input type="text" th:field="*{description}" id="description"/>
+        <br/>
+        <input type="submit" value="Update!"/>
+    </form>
+</form>
+</body>
+</html>

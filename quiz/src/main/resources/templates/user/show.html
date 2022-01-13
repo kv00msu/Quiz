@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Info quiz</title>
+</head>
+<body>
+<div>
+    Id:<span th:text="${quiz.getId()}">name</span><br/>
+    Name:<span th:text="${quiz.getNameQuiz()}">name</span><br/>
+    Start date:<span th:text="${quiz.getStartDate()}" th:type="date">name</span><br/>
+    End date:<span th:text="${quiz.getEndDate()}" th:type="date">name</span><br/>
+</div>
+
+
+</body>
+</html>

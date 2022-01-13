@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Info quiz</title>
+</head>
+<body>
+<div>
+    Id:<span th:text="${quiz.getId()}">name</span><br/>
+    Name:<span th:text="${quiz.getNameQuiz()}">name</span><br/>
+    Start date:<span th:text="${quiz.getStartDate()}" th:type="date">name</span><br/>
+    End date:<span th:text="${quiz.getEndDate()}" th:type="date">name</span><br/>
+    <div th:each="question : ${questions}">
+        <p th:text="${question.getQuestion()}">question</p>
+        <p th:text="${question.getAnswerOne1()}">type</p>
+        <p th:text="${question.getAnswerOne2()}">type</p>
+        <p th:text="${question.getAnswerOne3()}">type</p>
+    </div>
+    <a th:href="@{/admin/{id}/edit(id=${quiz.getId()})}">Edit Quiz</a>
+    <a th:href="@{/questions/{id}(id=${quiz.getId()})}">Add question</a>
+
+</div>
+<form method="Post" th:action="@{/admin/{id}(id=${quiz.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
+
+
+</body>
+</html>
