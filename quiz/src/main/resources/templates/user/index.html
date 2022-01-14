@@ -6,7 +6,7 @@
 </head>
 <body>
 <div th:each="quiz : ${quizs}">
-    <a th:href="@{/user/{id}(id=${quiz.getId()})}" th:text="${quiz.getNameQuiz()}">quiz</a>
+    <a th:href="@{/user/{login}/{id}(id=${quiz.getId()}, login=${login})}" th:text="${quiz.getNameQuiz()}">quiz</a>
 </div>
 </body>
 </html>

@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Set;
 
-//@Data
+@Data
 @Component
 @Entity
 @Table(name="questions")
@@ -23,6 +23,7 @@ public class Questions {
     @Column(name="answer")
     private String answer;
     @Column(name="type")
+    @Enumerated(EnumType.STRING)
     private AnswerEnum type;
     @Column
     private String answerText;
@@ -35,49 +36,10 @@ public class Questions {
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
-
+    @ManyToMany(mappedBy = "questions")
+    private List<User> user;
     public Questions() {
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getAnswerText() {
-        return answerText;
-    }
-
-    public void setAnswerText(String answerText) {
-        this.answerText = answerText;
-    }
-
-    public String getAnswerOne1() {
-        return answerOne1;
-    }
-
-    public void setAnswerOne1(String answerOne1) {
-        this.answerOne1 = answerOne1;
-    }
-
-    public String getAnswerOne2() {
-        return answerOne2;
-    }
-
-    public void setAnswerOne2(String answerOne2) {
-        this.answerOne2 = answerOne2;
-    }
-
-    public String getAnswerOne3() {
-        return answerOne3;
-    }
-
-    public void setAnswerOne3(String answerOne3) {
-        this.answerOne3 = answerOne3;
-    }
-
     public String getQuestion() {
         return question;
     }
@@ -86,27 +48,5 @@ public class Questions {
         this.question = question;
     }
 
-    public String getAnswer() {
-        return answer;
-    }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
-    }
-
-    public AnswerEnum getType() {
-        return type;
-    }
-
-    public void setType(AnswerEnum type) {
-        this.type = type;
-    }
-
-    public Quiz getQuiz() {
-        return quiz;
-    }
-
-    public void setQuiz(Quiz quiz) {
-        this.quiz = quiz;
-    }
 }

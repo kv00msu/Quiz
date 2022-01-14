@@ -1,5 +1,6 @@
 package com.quiz.models;
 
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,7 @@ import java.sql.Date;
 import java.util.List;
 
 @Component
-//@Data
+@Data
 @Entity
 @Table(name="quiz")
 public class Quiz {
@@ -25,52 +26,14 @@ public class Quiz {
     private Date endDate;
     @Column(name="description")
     private String description;
+    @ManyToMany(mappedBy = "quiz")
+    private List<User> user;
+
+    @OneToMany(mappedBy="quiz", fetch=FetchType.EAGER,cascade = CascadeType.REMOVE)
+    private List<Questions> questions;
 
     public void setQuestions(List<Questions> questions) {
         this.questions = questions;
-    }
-
-    @OneToMany(mappedBy="quiz", fetch=FetchType.EAGER)
-    private List<Questions> questions;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNameQuiz() {
-        return nameQuiz;
-    }
-
-    public void setNameQuiz(String nameQuiz) {
-        this.nameQuiz = nameQuiz;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public List<Questions> getQuestions() {

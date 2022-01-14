@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/adminLogin}" th:object="${user}">
+    <label for="login">Введите логин: </label>
+    <input type="text" th:field="*{login}" id="login"/>
+    <br/>
+    <label for="password">Веедите пароль: </label>
+    <input type="text" th:field="*{password}" id="password"/>
+    <br/>
+    <input type="submit" value="Log in!"/>
+</form>
+</body>
+</html>

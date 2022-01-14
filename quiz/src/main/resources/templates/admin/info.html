@@ -1,8 +1,17 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns:text-indent="http://www.w3.org/1999/xhtml"
+      xmlns:padding="http://www.w3.org/1999/xhtml" xmlns:margin="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Info quiz</title>
+    <style>
+        .text-block {
+            margin-left:20px;
+        }
+        .text-block1 {
+            margin-left:40px;
+        }
+    </style>
 </head>
 <body>
 <div>
@@ -10,17 +19,25 @@
     Name:<span th:text="${quiz.getNameQuiz()}">name</span><br/>
     Start date:<span th:text="${quiz.getStartDate()}" th:type="date">name</span><br/>
     End date:<span th:text="${quiz.getEndDate()}" th:type="date">name</span><br/>
-    <div th:each="question : ${questions}">
-        <p th:text="${question.getQuestion()}">question</p>
-        <p th:text="${question.getAnswerOne1()}">type</p>
-        <p th:text="${question.getAnswerOne2()}">type</p>
-        <p th:text="${question.getAnswerOne3()}">type</p>
+    <div th:each="question : ${questions}" th:switch="${question.getType().name()}">
+        Question:<span th:text="${question.getQuestion()}">question</span></br>
+        <div class="text-block">
+            Answer:<span th:text="${question.getAnswer()}">type</span></br>
+        </div>
+<!--        <div th:case="'text'" class="text-block1">-->
+<!--            Variant:<span th:text="${question.getAnswerText}">type</span></br>-->
+<!--        </div>-->
+        <div th:case="'one'" class="text-block1">
+            Varian1:<span th:text="${question.getAnswerOne1()}" >type</span></br>
+            Varian2:<span th:text="${question.getAnswerOne2()}" >type</span></br>
+            Varian3:<span th:text="${question.getAnswerOne3()}" >type</span></br>
+        </div>
     </div>
-    <a th:href="@{/admin/{id}/edit(id=${quiz.getId()})}">Edit Quiz</a>
-    <a th:href="@{/questions/{id}(id=${quiz.getId()})}">Add question</a>
+    <a th:href="@{/admin/{login}/{id}/edit(id=${quiz.getId()}, login=${login})}">Edit Quiz</a>
+    <a th:href="@{/questions/{login}/{id}(id=${quiz.getId()}, login=${login})}">Add question</a>
 
 </div>
-<form method="Post" th:action="@{/admin/{id}(id=${quiz.getId()})}">
+<form method="Post" th:action="@{/admin/{login}/{id}(id=${quiz.getId()}, login=${login})}">
     <input type="submit" value="Delete"/>
 </form>
 

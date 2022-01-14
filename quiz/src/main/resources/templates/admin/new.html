@@ -5,7 +5,7 @@
     <title>New Quiz</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/admin}" th:object="${quiz}">
+<form th:method="POST" th:action="@{/admin/{login}(login=${login})}" th:object="${quiz}">
     <label for="nameQuiz">Введите название опроса: </label>
     <input type="text" th:field="*{nameQuiz}" id="nameQuiz"/>
     <br/>
@@ -18,9 +18,6 @@
     <label for="description">Описание опроса: </label>
     <input type="text" th:field="*{description}" id="description"/>
     <br/>
-<!--    <label for="answer">Впорос: </label>-->
-<!--    <input type="text" th:field="*{questions.answer}" id="answer"/>-->
-<!--    <br/>-->
     <input type="submit" value="Create!"/>
 </form>
 </body>

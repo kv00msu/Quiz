@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-    <form th:method="POST" th:action="@{/admin/{id}/edit(id=${quiz.getId()})}" th:object="${quiz}">
+    <form th:method="POST" th:action="@{/admin/{login}/{id}/edit(id=${quiz.getId()}, login=${login})}" th:object="${quiz}">
         <label for="nameQuiz">Enter name: </label>
         <input type="text" th:field="*{nameQuiz}" id="nameQuiz"/>
         <br/>

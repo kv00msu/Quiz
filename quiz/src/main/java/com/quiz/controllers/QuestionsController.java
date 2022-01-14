@@ -18,15 +18,15 @@ public class QuestionsController {
     @Autowired
     public QuizDAO quizDAO;
 
-    @GetMapping("/{id}")
-    public String newQuiz(@ModelAttribute("questions") Questions questions, @PathVariable Long id) {
+    @GetMapping("/{login}/{id}")
+    public String newQuiz(@ModelAttribute("questions") Questions questions, @PathVariable("id") Long id, @PathVariable("login") String login) {
         return "questions/new";
     }
 
-    @PostMapping("/{ques_id}")
-    public String createQuiz(@ModelAttribute("questions") Questions questions, @PathVariable Long ques_id) {
+    @PostMapping("/{login}/{ques_id}")
+    public String createQuiz(@ModelAttribute("questions") Questions questions, @PathVariable("ques_id") Long ques_id, @PathVariable("login") String login) {
         questions.setQuiz(quizDAO.show(ques_id));
         questionsDAO.save(questions);
-        return "redirect:/admin";
+        return "redirect:/admin/"+login;
     }
 }

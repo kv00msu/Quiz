@@ -45,10 +45,4 @@ public class QuizDAO {
         quizRepository.save(quizToBeUpdated);
     }
 
-//    public List<Questions> showQuestions(Long id) {
-//        Quiz quiz = quizRepository.getById(id);
-//        quiz.setQuestions(questionsRepository.getById(id));
-//        return quiz.getQuestions();
-//    }
-
 }
