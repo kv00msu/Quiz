@@ -2,8 +2,10 @@ package com.quiz.controllers;
 
 import com.quiz.DAO.QuestionsDAO;
 import com.quiz.DAO.QuizDAO;
+import com.quiz.DAO.UserQuizDAO;
 import com.quiz.models.Questions;
 import com.quiz.models.Quiz;
+import com.quiz.models.UserQuiz;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +21,7 @@ public class adminController {
     @Autowired
     private QuizDAO quizDAO;
     @Autowired
-    private QuestionsDAO questionsDAO;
+    public QuestionsDAO questionsDAO;
 
     @GetMapping("/{login}")
     public String mainAdmin(@PathVariable("login") String login, Model model) {
@@ -37,7 +39,6 @@ public class adminController {
     @PostMapping("/{login}")
     public String createQuiz(@PathVariable("login") String login, @ModelAttribute("quiz") Quiz quiz) {
         quizDAO.save(quiz);
-        System.out.println(login);
         return "redirect:/admin/"+login;
     }
     @GetMapping("/{login}/{id}")

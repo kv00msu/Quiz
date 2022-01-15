@@ -37,8 +37,6 @@ public class UserDAO {
         User userToBeUpdated = show(id);
         userToBeUpdated.setLogin(user.getLogin());
         userToBeUpdated.setPassword(user.getPassword());
-        userToBeUpdated.setQuit(user.getQuit());
-        userToBeUpdated.setQuiz(user.getQuiz());
         userToBeUpdated.setIsAdmin(user.getIsAdmin());
         userRepository.save(userToBeUpdated);
     }

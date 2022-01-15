@@ -1,6 +1,7 @@
 package com.quiz.DAO;
 
 import com.quiz.models.Questions;
+import com.quiz.models.Quiz;
 import com.quiz.repositories.QuestionsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -28,7 +29,9 @@ public class QuestionsDAO {
     public void delete(Questions questions) {
         questionsRepository.delete(questions);
     }
-
+    public List<Questions> getByQuiz(Quiz quiz) {
+        return questionsRepository.getByQuiz(quiz);
+    }
     public void edit(Long id,Questions questions) {
         Questions questions1 = show(id);
         questions1.setQuestion(questions.getQuestion());

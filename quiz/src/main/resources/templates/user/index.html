@@ -8,5 +8,7 @@
 <div th:each="quiz : ${quizs}">
     <a th:href="@{/user/{login}/{id}(id=${quiz.getId()}, login=${login})}" th:text="${quiz.getNameQuiz()}">quiz</a>
 </div>
+<a href="/">Home</a>
+
 </body>
 </html>

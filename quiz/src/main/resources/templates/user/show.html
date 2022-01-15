@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org" xmlns:text-indent="http://www.w3.org/1999/xhtml"
-      xmlns:padding="http://www.w3.org/1999/xhtml" xmlns:margin="http://www.w3.org/1999/xhtml">
+      xmlns:padding="http://www.w3.org/1999/xhtml" xmlns:margin="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Info quiz</title>
     <style>
         .text-block {
-            margin-left:20px;
+            margin-left:-40px;
         }
         .text-block1 {
             margin-left:40px;
         }
     </style>
+
 </head>
 <body>
 <div th:switch="${user.getQuit()}">
@@ -21,23 +23,27 @@
     End date:<span th:text="${quiz.getEndDate()}" th:type="date">name</span><br/>
     <div th:case="'no'">
         <form th:method="POST" th:action="@{/user/{login}/{id}(id=${quiz.getId()}, login=${login})}">
-            <div th:each="question : ${questions}" th:switch="${question.getType().name()}">
-                Question:<span th:text="${question.getQuestion()}">question</span></br>
+                <div th:each="question : ${questions}" th:switch="${question.getType().name()}">
                 <div th:case="'text'" class="text-block1">
+                    <span class="text-block">Question:</span>
+                    <span th:text="${question.getQuestion()}">question</span></br>
                     Variant:
                         <input type="text" name="textAnswer" placeholder="Введите вариант ответа:"/>
                         <br/>
                 </div>
                 <div th:case="'one'" class="text-block1">
-                    <input type="radio" id="answerOne1" name="yourAnswer" th:value="${question.getAnswerOne1()}">
+                    <span class="text-block">Question:</span>
+                    <span th:text="${question.getQuestion()}" >question</span>
+                    <span >Выберите один вариант ответа!!!</span></br>
+                    <input type="checkbox" id="answerOne1" name="yourAnswer" th:value="${question.getAnswerOne1()}">
                     <label for="answerOne1">
                         Varian1:<span th:text="${question.getAnswerOne1()}" >type</span></br>
                     </label></br>
-                    <input type="radio" id="answerOne2" name="yourAnswer" th:value="${question.getAnswerOne2()}">
+                    <input type="checkbox" id="answerOne2" name="yourAnswer" th:value="${question.getAnswerOne2()}">
                     <label for="answerOne2">
                         Varian2:<span th:text="${question.getAnswerOne2()}" >type</span></br>
                     </label></br>
-                    <input type="radio" id="answerOne3" name="yourAnswer" th:value="${question.getAnswerOne3()}">
+                    <input type="checkbox" id="answerOne3" name="yourAnswer" th:value="${question.getAnswerOne3()}">
                     <label for="answerOne3">
                         Varian3:<span th:text="${question.getAnswerOne3()}" >type</span></br>
                     </label>
@@ -50,10 +56,14 @@
         <form th:method="get" th:action="@{/user/{id}(id=${quiz.getId()})}">
             <div th:each="question : ${questions}">
                 True answer:<span th:text="${question.getAnswer()}" >type</span></br>
-                Your answer:<span th:text="${question.getAnswerText()}" >type</span></br>
+                Your answer:<span th:text="${question.getAnswerText()}" >type</span></br></br>
             </div>
         </form>
     </div>
+    Result:<span th:text="${result}">res</span>
+    /<span th:text="${count}">count</span>
 </div>
+<a href="/">Home</a>
+
 </body>
 </html>

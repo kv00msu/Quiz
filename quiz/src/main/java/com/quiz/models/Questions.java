@@ -36,8 +36,6 @@ public class Questions {
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "quiz_id")
     private Quiz quiz;
-    @ManyToMany(mappedBy = "questions")
-    private List<User> user;
     public Questions() {
     }
     public String getQuestion() {

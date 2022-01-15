@@ -2,15 +2,22 @@ package com.quiz.models;
 
 import lombok.Builder;
 import lombok.Data;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
+
+import static org.hibernate.annotations.LazyCollectionOption.FALSE;
+import static org.hibernate.annotations.LazyCollectionOption.TRUE;
 
 @Component
-@Data
 @Entity
 @Table(name="quiz")
 public class Quiz {
@@ -26,14 +33,59 @@ public class Quiz {
     private Date endDate;
     @Column(name="description")
     private String description;
-    @ManyToMany(mappedBy = "quiz")
-    private List<User> user;
-
-    @OneToMany(mappedBy="quiz", fetch=FetchType.EAGER,cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy="quiz",cascade = CascadeType.REMOVE)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<UserQuiz> userQuiz;
+    @OneToMany(mappedBy="quiz", cascade = CascadeType.REMOVE)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Questions> questions;
 
-    public void setQuestions(List<Questions> questions) {
-        this.questions = questions;
+    public String getNameQuiz() {
+        return nameQuiz;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNameQuiz(String nameQuiz) {
+        this.nameQuiz = nameQuiz;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<UserQuiz> getUserQuiz() {
+        return userQuiz;
+    }
+
+    public void setUserQuiz(UserQuiz userQuiz) {
+        this.userQuiz.add(userQuiz);
     }
 
     public List<Questions> getQuestions() {
