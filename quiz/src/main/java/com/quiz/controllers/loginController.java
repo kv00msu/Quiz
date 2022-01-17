@@ -20,7 +20,7 @@ public class loginController {
     @PostMapping("/userLogin")
     public String getUserLogin(@ModelAttribute("user") User user) {
         User user1 = userDAO.getByLogin(user.getLogin());
-        if (user1 != null  && user1.getPassword().equals(user.getPassword()) && user1.getIsAdmin() != "yes") {
+        if (user1 != null  && user1.getPassword().equals(user.getPassword()) && !user1.getIsAdmin().equals("yes")) {
             return "redirect:/user/" + user.getLogin();
         }
         else if (user1 == null) {
